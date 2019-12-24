@@ -5,7 +5,11 @@
 #         : philip walsh
 #         : philipwalsh.ds@gmail.com
 #         : 2019-12-23
-
+# 
+#  machines status
+# lenovo laptop running keras/tensorflow apprently ok on first look.
+# custom pc with dual gpus cannot load keras without mkl error
+# asus laptop ?
 
 from keras.models import Sequential, load_model
 #from keras.models import load_model
