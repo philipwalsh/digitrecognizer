@@ -11,20 +11,26 @@
 # custom pc with dual gpus cannot load keras without mkl error
 # asus laptop ?
 
-from keras.models import Sequential, load_model
-#from keras.models import load_model
-#from tensorflow.keras.models import Sequential, load_model
+#from keras.models import Sequential, load_model
+from tensorflow.keras.models import load_model
+from tensorflow.keras.models import Sequential
 
 
 
-from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D
-from keras.optimizers import Adam, RMSprop
+# from keras.models import load_model
+
+# set CONDA_DLL_SEARCH_MODIFICATION_ENABLE=1
+
+
+from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D
+from tensorflow.keras.optimizers import Adam, RMSprop
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import ReduceLROnPlateau
 
 def init_model():
+    
     model = Sequential()
-    model.add(Conv2D(filters=32, kernel_size=(5,5), padding='Valid', activation='relu', input_shape=(28,82,1)))
+    model.add(Conv2D(filters=32, kernel_size=(5,5), padding='Valid', activation='relu', input_shape=(28,82,1)))   
     model.add(Conv2D(filters=32, kernel_size=(3,3), padding='Same', activation='relu'))
     model.add(MaxPool2D(pool_size=(2,2)))
 
@@ -68,7 +74,7 @@ import matplotlib.pyplot as plt
 from os.path import isfile, join
 from sklearn.model_selection import ShuffleSplit
 #import lib.model as md
-import lib
+
 
 from sklearn.metrics import accuracy_score, confusion_matrix
 from keras.utils.np_utils import to_categorical
