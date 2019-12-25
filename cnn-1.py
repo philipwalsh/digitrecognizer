@@ -8,7 +8,7 @@
 # 
 #  machines status
 # lenovo laptop running keras/tensorflow apprently ok on first look.
-# custom pc with dual gpus cannot load keras without mkl error
+# custom pc - windows reset 12/24/2019 , with minimal apps installed appears to be working!
 # asus laptop ?
 
 #from keras.models import Sequential, load_model
