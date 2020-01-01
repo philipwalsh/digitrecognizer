@@ -10,9 +10,15 @@ import datetime
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
-my_epochs = 25
-my_dropout= 0.20
+my_epochs = 30
+my_dropout = 0.30
 my_test_size = 0.20
+my_learning_rate =.005
+my_activation = 'relu'
+my_optimizer = 'adam'
+
+# 'relu', 'elu', 'tanh'
+# adam, rmsprop?
 
 ##########################################################################
 ##### TEST SIZE 0.20
@@ -27,12 +33,22 @@ my_test_size = 0.20
 # 50 epochs, 0.30 dropout: loss= 0.0695, accuracy=0.9766, kaggle=0.?????
 #####
 ##########################################################################
-
-
 # re running my best, with a larger data set
 # all rows shifted left 5 px and right 5 px, then combined
 # 25 epochs, 0.20 dropout: loss= 0.1134, accuracy=0.9726, kaggle=0.97142 , not an improvement
 
+# [0.9788] epochs=25, dropout=.2, test_size=.2, learning_rate=.001
+# [0.9753] epochs=25, dropout=.2, test_size=.2, learning_rate=.002
+
+
+# now with new augmented data, shifted left and de-bolded, shifted right and bolded
+# [0.9685] my_epochs = 5, my_dropout= 0.25, my_test_size = 0.25, my_learning_rate=.0005
+# [0.9744] my_epochs = 25, my_dropout= 0.25, my_test_size = 0.25, my_learning_rate=.0005
+# [0.9767] my_epochs = 25, my_dropout= 0.15, my_test_size = 0.20, my_learning_rate=.00125, kaggle=0.97685
+# [0.9765] my_epochs = 35, my_dropout= 0.25, my_test_size = 0.10, my_learning_rate=.00125, kaggle 0.97385
+
+
+# [0.9706] my_epochs = 20, my_dropout = 0.10, my_test_size = 0.10, my_learning_rate = .01, my_activation = 'relu', my_optimizer = 'adam'
 
 
 import os
@@ -65,14 +81,18 @@ X_ho = np.asarray(X_ho)
 
 #print(1/0)
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Dense(units=512, activation='relu', input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=1024, activation=my_activation, input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=256, activation='relu', input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=512, activation=my_activation, input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=128, activation='relu', input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=256, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dropout(my_dropout))
+model.add(tf.keras.layers.Dense(units=128, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dropout(my_dropout))
+model.add(tf.keras.layers.Dense(units=64, activation=my_activation, input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(my_dropout))
 model.add(tf.keras.layers.Dense(units=10, activation='softmax'))
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['sparse_categorical_accuracy'])
+model.compile(optimizer=my_optimizer, loss='sparse_categorical_crossentropy', metrics=['sparse_categorical_accuracy'], learning_rate=my_learning_rate)
 model.summary()
 model.fit(X_train, y_train, epochs=my_epochs, verbose=False)
 test_loss, test_accuracy = model.evaluate(X_ho, y_ho)
