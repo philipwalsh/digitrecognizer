@@ -9,6 +9,9 @@ for x in range(col_min, col_max):
     train['pixel'+str(x)] = train['pixel'+str(x+5)]
 for x in range(783, 778):
     train['pixel'+str(x)] = 0
+
+#de-bold it
+train.values[train.values>75] = 75
 train.to_csv('excluded/shifted-left.csv', index=False)
 
 del train
@@ -23,8 +26,11 @@ for x in range(col_max, col_min, -1):
 for x in range(0, 4):
     train['pixel'+str(x)] = 0
 
-train.to_csv('excluded/shifted-right.csv', index=False)
+#bold it
+train.values[train.values>122] = 255
 
+train.to_csv('excluded/shifted-right.csv', index=False)
+#print(1/0)
 
 del train
 
