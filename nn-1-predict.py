@@ -10,7 +10,7 @@ import datetime
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
-my_epochs = 5
+my_epochs = 25
 my_dropout = 0.20
 my_test_size = 0.20
 my_learning_rate =.000875
@@ -52,6 +52,10 @@ my_optimizer = 'adam'
 
 # nn with 
 # [0.9774] my_epochs = 30, my_dropout = 0.30, my_test_size = 0.20, my_learning_rate =.005, my_activation = 'relu', my_optimizer = 'adam', kaggle=
+
+
+# 0.9729 my_epochs = 15, my_dropout = 0.20, my_test_size = 0.20, my_learning_rate =.000875, my_activation = 'relu', my_optimizer = 'adam'
+# 0.9737 my_epochs = 20, my_dropout = 0.20, my_test_size = 0.20, my_learning_rate =.000875, my_activation = 'relu', my_optimizer = 'adam'
 
 
 import os
