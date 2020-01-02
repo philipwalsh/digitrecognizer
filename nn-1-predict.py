@@ -56,6 +56,7 @@ my_optimizer = 'adam'
 
 # 0.9729 my_epochs = 15, my_dropout = 0.20, my_test_size = 0.20, my_learning_rate =.000875, my_activation = 'relu', my_optimizer = 'adam'
 # 0.9737 my_epochs = 20, my_dropout = 0.20, my_test_size = 0.20, my_learning_rate =.000875, my_activation = 'relu', my_optimizer = 'adam'
+# 0.9740 my_epochs = 25, my_dropout = 0.20, my_test_size = 0.20, my_learning_rate =.000875, my_activation = 'relu', my_optimizer = 'adam' kaggle = 0.96942
 
 
 import os
@@ -88,11 +89,11 @@ X_ho = np.asarray(X_ho)
 
 #print(1/0)
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Dense(units=188, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=512, activation=my_activation, input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=94, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=256, activation=my_activation))
 model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=28, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=128, activation=my_activation))
 model.add(tf.keras.layers.Dropout(my_dropout))
 
 model.add(tf.keras.layers.Dense(units=10, activation='softmax'))
