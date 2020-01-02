@@ -10,10 +10,10 @@ import datetime
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
-my_epochs = 30
-my_dropout = 0.30
+my_epochs = 5
+my_dropout = 0.20
 my_test_size = 0.20
-my_learning_rate =.005
+my_learning_rate =.000875
 my_activation = 'relu'
 my_optimizer = 'adam'
 
@@ -45,10 +45,13 @@ my_optimizer = 'adam'
 # [0.9685] my_epochs = 5, my_dropout= 0.25, my_test_size = 0.25, my_learning_rate=.0005
 # [0.9744] my_epochs = 25, my_dropout= 0.25, my_test_size = 0.25, my_learning_rate=.0005
 # [0.9767] my_epochs = 25, my_dropout= 0.15, my_test_size = 0.20, my_learning_rate=.00125, kaggle=0.97685
-# [0.9765] my_epochs = 35, my_dropout= 0.25, my_test_size = 0.10, my_learning_rate=.00125, kaggle 0.97385
+# [0.9765] my_epochs = 35, my_dropout= 0.25, my_test_size = 0.10, my_learning_rate=.00125, kaggle=0.97385
 
 
 # [0.9706] my_epochs = 20, my_dropout = 0.10, my_test_size = 0.10, my_learning_rate = .01, my_activation = 'relu', my_optimizer = 'adam'
+
+# nn with 
+# [0.9774] my_epochs = 30, my_dropout = 0.30, my_test_size = 0.20, my_learning_rate =.005, my_activation = 'relu', my_optimizer = 'adam', kaggle=
 
 
 import os
@@ -81,16 +84,13 @@ X_ho = np.asarray(X_ho)
 
 #print(1/0)
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Dense(units=1024, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=188, activation=my_activation, input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=512, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=94, activation=my_activation, input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=256, activation=my_activation, input_shape=(784, )))
+model.add(tf.keras.layers.Dense(units=28, activation=my_activation, input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=128, activation=my_activation, input_shape=(784, )))
-model.add(tf.keras.layers.Dropout(my_dropout))
-model.add(tf.keras.layers.Dense(units=64, activation=my_activation, input_shape=(784, )))
-model.add(tf.keras.layers.Dropout(my_dropout))
+
 model.add(tf.keras.layers.Dense(units=10, activation='softmax'))
 model.compile(optimizer=my_optimizer, loss='sparse_categorical_crossentropy', metrics=['sparse_categorical_accuracy'], learning_rate=my_learning_rate)
 model.summary()
